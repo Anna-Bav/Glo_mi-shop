@@ -71,7 +71,7 @@ loginBtn.addEventListener('click', () => {
     }
 
     getData('/profile').then((data) => {
-        console.log(data);
+        // console.log(data);
         if (
             (data.login && data.login == user.login) && 
             (data.password && data.password == user.password)
@@ -89,10 +89,6 @@ logoutBtn.addEventListener('click', () => {
     localStorage.removeItem('auth');
     
     logout()
-})
-
-openCartBtn.addEventListener('click', () => {
-    openModal(cartModal)
 })
 
 checkAuth()
