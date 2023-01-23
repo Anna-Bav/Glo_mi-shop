@@ -3,10 +3,13 @@ import { getData } from './api';
 
 
 export const categoriesFunc = () => {
-    const container = document.getElementById('categories-container')
+    const container = document.getElementById('categories-container');
+    const catalogSearch = document.querySelector('.catalog-search');
 
 
     const render = (data) => {
+        container.innerHTML = '';
+
         data.forEach((item) => {
             container.insertAdjacentHTML('beforeend', `
             <div class="col col-12 col-md-6 col-lg-4 mb-3">
@@ -22,6 +25,18 @@ export const categoriesFunc = () => {
             `)
         })
     }
+
+    catalogSearch.addEventListener('input', (event) => {
+       getData(`/categories?q=${event.target.value}`)
+       .then((data) => {
+        render(data);
+    })
+    .catch((error) => {
+        console.error('Произошла ошибка!')
+    })
+    })
+
+
     getData('/categories')
         .then((data) => {
             render(data);
